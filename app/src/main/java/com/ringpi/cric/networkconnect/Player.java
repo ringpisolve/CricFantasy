@@ -4,6 +4,9 @@ public class Player {
 
     private int pid;
     private String name;
+    private boolean isFreeAgent;
+    private String franchiseName;
+    private boolean isInPlayingEleven;
 
     public boolean isFreeAgent() {
         return isFreeAgent;
@@ -13,9 +16,6 @@ public class Player {
         isFreeAgent = freeAgent;
     }
 
-    private boolean isFreeAgent;
-    private String franchiseName;
-
     public boolean isInPlayingEleven() {
         return isInPlayingEleven;
     }
@@ -24,7 +24,6 @@ public class Player {
         isInPlayingEleven = inPlayingEleven;
     }
 
-    private boolean isInPlayingEleven;
 
     public Player(int pid, String name, boolean isFreeAgent, String franchiseName) {
         this.pid = pid;
