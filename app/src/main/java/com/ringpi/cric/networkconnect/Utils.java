@@ -8,12 +8,7 @@ import java.util.Date;
 
 public class Utils {
 
-    public DocumentReference getTeamDocumentReference(String teamName, FirebaseFirestore fireDatabase) {
-        return fireDatabase.collection("leagues")
-                .document("kc-league")
-                .collection("teams")
-                .document(teamName);
-    }
+
 
     public String getCurrentDate() {
         Date date = new Date();

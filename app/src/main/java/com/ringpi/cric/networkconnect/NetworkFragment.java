@@ -160,7 +160,7 @@ public class NetworkFragment extends Fragment {
     }
 
     public void incrementTeamTotalPoints(String teamName, int pointsFromThisMatch) {
-        DocumentReference teamDocRef = new Utils().getTeamDocumentReference(teamName, mFireDatabase);
+        DocumentReference teamDocRef = new FirebaseUtils().getTeamDocumentReference(teamName, mFireDatabase);
 
         teamDocRef
                 .update("totalPoints", FieldValue.increment(pointsFromThisMatch))
