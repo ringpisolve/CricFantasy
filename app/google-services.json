@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "732315276807",
+    "firebase_url": "https://cricfantasy-4609c.firebaseio.com",
+    "project_id": "cricfantasy-4609c",
+    "storage_bucket": "cricfantasy-4609c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732315276807:android:063c12a90b9e4116dafca2",
+        "android_client_info": {
+          "package_name": "com.ringpi.cric"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "732315276807-mqlv22fgo59fea5vipeu6isucacl1kfa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeoAMamar3yzVNeNjqzeL8GcXFn379h_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "732315276807-mqlv22fgo59fea5vipeu6isucacl1kfa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
