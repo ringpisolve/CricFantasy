@@ -21,14 +21,24 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -43,6 +53,12 @@ public class NetworkFragment extends Fragment {
     private DownloadCallback mCallback;
     private DownloadTask mDownloadTask;
     private String mUrlString;
+
+    private FirebaseFirestore mFireDatabase = FirebaseFirestore.getInstance();
+
+    private HashMap<String, BattingScore> mBattingMap =new HashMap<>();
+    private HashMap<String, BowlingScore> mBowlingMap =new HashMap<>();
+    private HashMap<String, FieldingScore> mFieldingMap =new HashMap<>();
 
     /**
      * Static initializer for NetworkFragment that sets the URL of the host it will be downloading
@@ -67,7 +83,7 @@ public class NetworkFragment extends Fragment {
     }
 
     @Override
-    public void onCreate( Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Retain this Fragment across configuration changes in the host Activity.
         setRetainInstance(true);
@@ -78,7 +94,7 @@ public class NetworkFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         // Host Activity will handle callbacks from task.
-        mCallback = (DownloadCallback)context;
+        mCallback = (DownloadCallback) context;
     }
 
     @Override
@@ -112,6 +128,68 @@ public class NetworkFragment extends Fragment {
             mDownloadTask.cancel(true);
             mDownloadTask = null;
         }
+    }
+
+    public void parseResult(String result) {
+
+    }
+
+    public void addParsedDataToFirebase() {
+        incrementTeamTotalPoints("rahul-team", 8);
+        Map<String, Object> city = new HashMap<>();
+        city.put("name", "Los Angeles");
+        city.put("state", "CA");
+        city.put("country", "USA");
+
+        mFireDatabase.collection("cities").document("LA")
+                .set(city)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+
+
+    }
+
+    public void incrementTeamTotalPoints(String teamName, int pointsFromThisMatch) {
+        DocumentReference teamDocRef = new Utils().getTeamDocumentReference(teamName, mFireDatabase);
+
+        teamDocRef
+                .update("totalPoints", FieldValue.increment(pointsFromThisMatch))
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
+        teamDocRef
+                .update("lastUpdatedTime", new Utils().getCurrentDate())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
     }
 
     /**
@@ -169,10 +247,12 @@ public class NetworkFragment extends Fragment {
                     } else {
                         throw new IOException("No response received.");
                     }
-                } catch(Exception e) {
+                } catch (Exception e) {
                     result = new Result(e);
                 }
             }
+            //parseResult(result);
+            addParsedDataToFirebase();
             return result;
         }
 
