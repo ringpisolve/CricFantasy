@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     card_view:cardCornerRadius="4dp"
     android:layout_margin="10dp"
-    android:layout_height="200dp">
+    android:layout_height="48dp">
     <LinearLayout
         android:id = "@+id/parent"
         android:layout_gravity = "center"
