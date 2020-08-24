@@ -22,4 +22,11 @@
         android:name="com.ringpi.cric.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+    <activity
+        android:id="@+id/nav_squad"
+        android:name="com.ringpi.cric.squad.SquadActivity"
+        android:label="@string/password"
+        tools:layout="@layout/activity_squad"
+        />
+
 </navigation>
