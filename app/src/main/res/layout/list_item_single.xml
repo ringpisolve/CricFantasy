@@ -1,26 +1,13 @@
 <?xml version = "1.0" encoding = "utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     card_view:cardCornerRadius="4dp"
     android:layout_margin="10dp"
     android:layout_height="48dp">
-    <LinearLayout
-        android:id = "@+id/parent"
-        android:layout_gravity = "center"
-        android:layout_width = "match_parent"
-        android:orientation = "vertical"
-        android:gravity = "center"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_toEndOf="@id/image"
-            android:layout_toRightOf="@id/image"
-            android:orientation="vertical">
+
+
             <CheckBox
                 android:id="@+id/fac_name"
                 android:layout_width="wrap_content"
@@ -30,6 +17,4 @@
                 tools:text="Name" />
 
 
-        </LinearLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
