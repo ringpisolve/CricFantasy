@@ -26,6 +26,7 @@ public class SquadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_squad);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mFirestoreList=findViewById(R.id.firestore_list);
         firebaseFirestore=FirebaseFirestore.getInstance();
