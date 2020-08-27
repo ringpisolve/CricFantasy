@@ -31,8 +31,9 @@
         </activity>
         <activity
             android:name=".networkconnect.AddMatchActivity"
-            android:label="@string/app_name"
-            android:uiOptions="splitActionBarWhenNarrow">
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:label="@string/calculate_points"
+            android:parentActivityName=".MainActivity">
 
 
         </activity>
