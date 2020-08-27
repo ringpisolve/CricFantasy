@@ -63,7 +63,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     // downloads with consecutive button clicks.
     private boolean mDownloading = false;
     private Button calpoints;
-
+    private TextView Points;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
         mDataText = (TextView) findViewById(R.id.data_text);
         mFetchButton = (Button) findViewById(R.id.fetch_button);
         calpoints =(Button) findViewById(R.id.cal_points);
-
+       Points=(TextView) findViewById(R.id.points);
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference subjectsRef = rootRef.collection("matches");
@@ -119,8 +119,9 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
       @Override
       public void onClick(View view) {
           PointsCalculations pc =new PointsCalculations();
-          pc.calculateBatsmanPoints(null);
-          
+          String mm = String.valueOf(pc.calculateBatsmanPoints(null));
+          Points.setText(mm);
+
       }
   });
 
