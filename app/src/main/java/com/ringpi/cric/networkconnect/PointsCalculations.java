@@ -60,15 +60,24 @@ public class PointsCalculations {
         return result;
     }
 
-    public int calculateBowlerPoints(BowlingScore battingScoreObj) {
-        int result = 0;
+    public float calculateBowlerPoints(BowlingScore bowlingScoreObj) {
+        float result = 0;
+        bowlingScoreObj =new BowlingScore(3,3, (float) 5.2);
+        result =result+bowlingScoreObj.maidens*bowlingPointsMap.get("M");
+        result =result+bowlingScoreObj.wickets*bowlingPointsMap.get("W");
+        result =result+bowlingScoreObj.economy*bowlingPointsMap.get("Econ");
+
 
         return result;
     }
 
-    public int calculateFieldingPoints(FieldingScore battingScoreObj) {
-        int result = 0;
+    public float calculateFieldingPoints(FieldingScore fieldingScoreObj) {
+        float result = 0;
+        fieldingScoreObj=new FieldingScore(4,1);
+        result=result+fieldingScoreObj.catches*fieldingPointsMap.get("catch");
+        result=result+fieldingScoreObj.stumped*fieldingPointsMap.get("stumped");
 
+        
         return result;
     }
 }
