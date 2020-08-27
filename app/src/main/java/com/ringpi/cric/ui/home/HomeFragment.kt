@@ -17,6 +17,7 @@ import com.ringpi.cric.R
 class HomeFragment : Fragment() {
 
 
+    lateinit var listView : ListView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,20 +29,21 @@ class HomeFragment : Fragment() {
 
         val mFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
+        listView = view.findViewById(R.id.study_level_list)
+        var list = mutableListOf<Model>()
+
+        list.add(Model("Title One",   "Description One...",   R.mipmap.ic_launcher  ))
+        list.add(Model("Title Two",   "Description Two...",   R.mipmap.ic_launcher_round  ))
+        list.add(Model("Title Three", "Description Three...", R.mipmap.ic_launcher  ))
+        list.add(Model("Title Four",  "Description Four...",  R.mipmap.ic_launcher_round  ))
+        list.add(Model("Title Five",  "Description Five...",  R.mipmap.ic_launcher  ))
+
+        listView.adapter = context?.let { MyListAdapter(it,R.layout.row,list) }
+
+
         return view
         return root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        val context = context as MainActivity
-        val users = arrayOf(
-            "Virat Kohli", "Rohit Sharma", "Steve Smith",
-            "Kane Williamson", "Ross Taylor"
-        )
-        val lv = context.findViewById(R.id.study_level_list) as ListView
-        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, users)
-        lv.adapter = adapter
-    }
 }
