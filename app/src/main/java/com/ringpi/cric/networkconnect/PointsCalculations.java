@@ -1,5 +1,6 @@
 package com.ringpi.cric.networkconnect;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PointsCalculations {
@@ -60,6 +61,17 @@ public class PointsCalculations {
     }
 
     public int calculateFieldingPoints(FieldingScore battingScoreObj) {
+        int result = 0;
+
+        return result;
+    }
+
+    public float calculateSquadPointsForGivenMatch(
+            ArrayList<Integer> squadPidList,
+            HashMap<String, BattingScore> battingScoreHashMap,
+            HashMap<String, BowlingScore> bowlingScoreHashMap,
+            HashMap<String, BattingScore> fieldingScoreHashMap
+            ) {
         int result = 0;
 
         return result;
