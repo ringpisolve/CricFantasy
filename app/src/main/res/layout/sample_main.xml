@@ -41,13 +41,24 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:freezesText="true" />
-
+    <TextView
+        android:id="@+id/select_match"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/select_match_label"
+        />
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         />
+    <TextView
+        android:id="@+id/select_team"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/select_team_label"
 
+        />
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="match_parent"
@@ -58,6 +69,7 @@
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="@string/calculate_points" />
+        android:text="@string/calculate_points"
+        />
 
 </LinearLayout>
