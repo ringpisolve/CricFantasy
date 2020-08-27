@@ -20,8 +20,8 @@ public class PointsCalculations {
         battingPointsMap.put("duck", new Float(-2));
     }
 
-    public int calculateBatsmanPoints(BattingScore battingScoreObj) {
-        int result = 0;
+    public float calculateBatsmanPoints(BattingScore battingScoreObj) {
+        float result = 0;
         // Temporary Dummy obj
         int runs = 21;
         battingScoreObj = new BattingScore(runs, 2, 0,
@@ -29,7 +29,18 @@ public class PointsCalculations {
                 Utils.isDuck(runs));
         // Dummy object creation above to be deleted after json parsing.
         // Calculate points using battingScoreObj and battingPointsHashmap.
-
+        result= result + battingScoreObj.runs * battingPointsMap.get("R");
+        result= result + battingScoreObj.noOfFours * battingPointsMap.get("4s");
+        result= result + battingScoreObj.noOfSixes * battingPointsMap.get("6s");
+        if (battingScoreObj.isHalfCentury) {
+            result = result + battingPointsMap.get("halfCentury");
+        }
+        if (battingScoreObj.isCentury) {
+            result = result + battingPointsMap.get("century");
+        }
+        if (battingScoreObj.isDuck) {
+            result = result + battingPointsMap.get("duck");
+        }
         return result;
     }
 
