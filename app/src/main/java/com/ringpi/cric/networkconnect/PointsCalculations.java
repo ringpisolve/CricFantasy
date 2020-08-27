@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class PointsCalculations {
     private static HashMap<String, Float> battingPointsMap;
-    private static HashMap<String, Float> bowlingPointsMap;
+    private static HashMap<String, Integer> bowlingPointsMap;
     private static HashMap<String, Float> fieldingPointsMap;
 
 
@@ -18,6 +18,15 @@ public class PointsCalculations {
         battingPointsMap.put("halfCentury", new Float(4));
         battingPointsMap.put("century", new Float(8));
         battingPointsMap.put("duck", new Float(-2));
+    }
+
+    static
+    {
+        bowlingPointsMap = new HashMap<String, Integer>();
+        bowlingPointsMap.put("M",new Integer(4));
+        bowlingPointsMap.put("W",new Integer(10));
+        bowlingPointsMap.put("Econ",new Integer(-2));
+
     }
 
     public float calculateBatsmanPoints(BattingScore battingScoreObj) {
