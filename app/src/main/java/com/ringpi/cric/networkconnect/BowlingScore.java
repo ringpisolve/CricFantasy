@@ -9,7 +9,7 @@ package com.ringpi.cric.networkconnect;
 
     public BowlingScore( int maidens,int wickets,float economy) {
 
-
+        this.maidens = maidens;
         this.wickets = wickets;
         this.economy = economy;
 
