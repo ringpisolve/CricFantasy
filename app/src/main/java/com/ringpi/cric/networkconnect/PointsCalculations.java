@@ -22,6 +22,13 @@ public class PointsCalculations {
 
     public int calculateBatsmanPoints(BattingScore battingScoreObj) {
         int result = 0;
+        // Temporary Dummy obj
+        int runs = 21;
+        battingScoreObj = new BattingScore(runs, 2, 0,
+                Utils.isHalfCentury(runs), Utils.isCentury(runs),
+                Utils.isDuck(runs));
+        // Dummy object creation above to be deleted after json parsing.
+        // Calculate points using battingScoreObj and battingPointsHashmap.
 
         return result;
     }
