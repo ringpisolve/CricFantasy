@@ -106,7 +106,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
                         String subject1 = document.getString("name");
                         subjects1.add(subject1);
                     }
-                    adapter.notifyDataSetChanged();
+                    adapter1.notifyDataSetChanged();
                 }
             }
         });
