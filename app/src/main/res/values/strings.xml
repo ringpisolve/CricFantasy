@@ -17,6 +17,7 @@
     <string name="clear_text">Clear</string>
     <string name="connection_error">Connection Error</string>
     <string name="squad">Squad</string>
+    <string name="add_match">Add Match</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="your_squad_text">Your Squad</string>

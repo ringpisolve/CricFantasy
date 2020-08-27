@@ -7,6 +7,7 @@ public class PointsCalculations {
     private static HashMap<String, Float> bowlingPointsMap;
     private static HashMap<String, Float> fieldingPointsMap;
 
+
     // Instantiating the static map
     static
     {
