@@ -84,12 +84,37 @@ public class PointsCalculations {
 
     public float calculateSquadPointsForGivenMatch(
             ArrayList<Integer> squadPidList,
-            HashMap<String, BattingScore> battingScoreHashMap,
-            HashMap<String, BowlingScore> bowlingScoreHashMap,
-            HashMap<String, BattingScore> fieldingScoreHashMap
+            HashMap<Integer, BattingScore> battingScoreHashMap,
+            HashMap<Integer, BowlingScore> bowlingScoreHashMap,
+            HashMap<Integer, FieldingScore> fieldingScoreHashMap
             ) {
-        int result = 0;
+        float result = 0;
 
+        float totalBattingPoints = 0;
+        for (Integer squadMember : squadPidList) {
+            BattingScore battingScoreObj = battingScoreHashMap.get(squadMember);
+            if ( battingScoreObj != null) {
+                totalBattingPoints = totalBattingPoints + calculateBatsmanPoints(battingScoreObj);
+            }
+        }
+
+        float totalBowlingPoints = 0;
+        for (Integer squadMember : squadPidList) {
+            BowlingScore bowlingScoreObj = bowlingScoreHashMap.get(squadMember);
+            if ( bowlingScoreObj != null) {
+                totalBowlingPoints = totalBowlingPoints + calculateBowlerPoints(bowlingScoreObj);
+            }
+        }
+
+        float totalFieldingPoints = 0;
+        for (Integer squadMember : squadPidList) {
+            FieldingScore fieldingScoreObj = fieldingScoreHashMap.get(squadMember);
+            if ( fieldingScoreObj != null) {
+                totalFieldingPoints = totalFieldingPoints + calculateFieldingPoints(fieldingScoreObj);
+            }
+        }
+
+        result = totalBattingPoints + totalBowlingPoints + totalFieldingPoints;
         return result;
     }
 }
