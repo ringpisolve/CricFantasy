@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class PointsCalculations {
     private static HashMap<String, Float> battingPointsMap;
-    private static HashMap<String, Integer> bowlingPointsMap;
+    private static HashMap<String, Float> bowlingPointsMap;
     private static HashMap<String, Float> fieldingPointsMap;
 
 
@@ -22,10 +22,17 @@ public class PointsCalculations {
 
     static
     {
-        bowlingPointsMap = new HashMap<String, Integer>();
-        bowlingPointsMap.put("M",new Integer(4));
-        bowlingPointsMap.put("W",new Integer(10));
-        bowlingPointsMap.put("Econ",new Integer(-2));
+        bowlingPointsMap = new HashMap<String,Float>();
+        bowlingPointsMap.put("M",new Float(4));
+        bowlingPointsMap.put("W",new Float(10));
+        bowlingPointsMap.put("Econ",new Float(-2));
+
+    }
+    static {
+        fieldingPointsMap= new HashMap<String, Float>();
+        fieldingPointsMap.put("catch",new Float(4));
+        fieldingPointsMap.put("stumped",new Float(6));
+     //TODO add run out    fieldingPointsMap.put("runout",new Float(6));
 
     }
 
