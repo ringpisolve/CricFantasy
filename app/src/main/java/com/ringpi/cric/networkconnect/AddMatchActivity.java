@@ -62,6 +62,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     // Boolean telling us whether a download is in progress, so we don't trigger overlapping
     // downloads with consecutive button clicks.
     private boolean mDownloading = false;
+    private Button calpoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
         setContentView(R.layout.sample_main);
         mDataText = (TextView) findViewById(R.id.data_text);
         mFetchButton = (Button) findViewById(R.id.fetch_button);
+        calpoints =(Button) findViewById(R.id.cal_points);
 
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
@@ -113,7 +115,14 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
 
 
 
-
+  calpoints.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+          PointsCalculations pc =new PointsCalculations();
+          pc.calculateBatsmanPoints(null);
+          
+      }
+  });
 
 
 
