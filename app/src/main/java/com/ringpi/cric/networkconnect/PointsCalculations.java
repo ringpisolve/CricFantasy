@@ -37,6 +37,8 @@ public class PointsCalculations {
 
     }
 
+
+
     public float calculateBatsmanPoints(BattingScore battingScoreObj) {
         float result = 0;
         // Temporary Dummy obj

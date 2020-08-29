@@ -16,19 +16,28 @@ public class Utils {
 
     public static boolean isHalfCentury(int runs) {
         boolean result = false;
+        if(runs>=50 && runs<100){
+            result=true;
+        }
 
         return result;
     }
 
     public static boolean isCentury(int runs) {
         boolean result = false;
+        if(runs>=100){
+            result=true;
+        }
+
 
         return result;
     }
 
     public static boolean isDuck(int runs) {
         boolean result = false;
-
+        if(runs==0){
+            result=true;
+        }
         return result;
     }
 }
