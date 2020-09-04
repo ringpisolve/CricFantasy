@@ -32,6 +32,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -143,11 +145,16 @@ public class NetworkFragment extends Fragment {
 
       if(result!=null){
           try {
-              JSONObject bowlingJson = new JSONObject(result);
-              JSONObject ObjectBowling = bowlingJson.getJSONObject("bowling");
-              maidens= Integer.parseInt(ObjectBowling.getString("M"));
+              JSONObject resultObj = new JSONObject(result);
+              JSONObject dataObj = resultObj.getJSONObject("data");
+              JsonArray matchBowlingArray = dataObj.getJSONArray("bowling");
+              JsonObject teamOneBowlingObj = matchBowlingArray.get(0);
+              JsonArray teamOneScoresArray = teamOneBowlingObj.getAsJsonArray("scores");
+              JsonObject teamOnePlayerOneBowlingObj = teamOneScoresArray.get(0);
+
+             /* maidens= Integer.parseInt(ObjectBowling.getString("M"));
               wickets= Integer.parseInt(ObjectBowling.getString("W"));
-              economy= Float.parseFloat(ObjectBowling.getString("Econ"));
+              economy= Float.parseFloat(ObjectBowling.getString("Econ"));*/
               bowlingScore.setMaidens(maidens);
               bowlingScore.setWickets(wickets);
               bowlingScore.setEconomy(economy);
