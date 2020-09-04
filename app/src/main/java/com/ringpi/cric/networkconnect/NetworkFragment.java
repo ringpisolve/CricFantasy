@@ -33,6 +33,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -130,7 +133,32 @@ public class NetworkFragment extends Fragment {
         }
     }
 
-    public void parseResult(String result) {
+    public BowlingScore parseResult(String result) {
+
+        BowlingScore bowlingScore=new BowlingScore();
+        int maidens;
+        int wickets;
+        float economy;
+
+
+      if(result!=null){
+          try {
+              JSONObject bowlingJson = new JSONObject(result);
+              JSONObject ObjectBowling = bowlingJson.getJSONObject("bowling");
+              maidens= Integer.parseInt(ObjectBowling.getString("M"));
+              wickets= Integer.parseInt(ObjectBowling.getString("W"));
+              economy= Float.parseFloat(ObjectBowling.getString("Econ"));
+              bowlingScore.setMaidens(maidens);
+              bowlingScore.setWickets(wickets);
+              bowlingScore.setEconomy(economy);
+
+          } catch (JSONException e) {
+              e.printStackTrace();
+          }
+      }
+      
+
+      return bowlingScore;
 
     }
 

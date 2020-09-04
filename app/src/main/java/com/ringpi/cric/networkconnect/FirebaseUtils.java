@@ -16,12 +16,7 @@ public class FirebaseUtils {
         return fireDatabase.collection("leagues")
                 .document("kc-league")
                 .collection("teams")
-                .document(teamName).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        ArrayList<String>=fireDatabase.document().getString("pid").toString();
-                    }
-                })
+                .document(teamName);
     }
 
     public ArrayList<Integer> getSquadPidList(String teamName) {
