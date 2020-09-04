@@ -39,6 +39,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ringpi.cric.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,7 +138,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
                 startDownload();
             }
         });
-        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/fantasySummary?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&unique_id=1034809");
+        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/fantasySummary?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&unique_id=1227889");
     }
 
     @Override
@@ -172,9 +176,44 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     public void updateFromDownload(String result) {
         if (result != null) {
             mDataText.setText(result);
+
+
+            BowlingScore bowlingScore=new BowlingScore();
+            int maidens;
+            int wickets;
+            float economy;
+
+            
+                try {
+                    JSONObject resultObj = new JSONObject(result);
+                    JSONObject dataObj = resultObj.getJSONObject("data");
+                    JSONArray matchBowlingArray = dataObj.getJSONArray("bowling");
+                    JSONObject teamOneBowlingObj = (JSONObject) matchBowlingArray.get(0);
+                    JSONArray teamOneScoresArray = teamOneBowlingObj.getJSONArray("scores");
+
+
+
+                    for(int i=0;i<=teamOneBowlingObj.length();i++) {
+
+                        JSONObject teamOnePlayerOneBowlingObj = (JSONObject) teamOneScoresArray.get(i);
+                        maidens = Integer.parseInt(teamOnePlayerOneBowlingObj.getString("M"));
+                        wickets = Integer.parseInt(teamOnePlayerOneBowlingObj.getString("W"));
+                        economy = Float.parseFloat(teamOnePlayerOneBowlingObj.getString("Econ"));
+                        bowlingScore.setMaidens(maidens);
+                        bowlingScore.setWickets(wickets);
+                        bowlingScore.setEconomy(economy);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
         } else {
             mDataText.setText(getString(R.string.connection_error));
         }
+
     }
 
     @Override

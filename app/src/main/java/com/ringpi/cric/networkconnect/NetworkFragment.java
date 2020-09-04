@@ -35,6 +35,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -135,7 +136,7 @@ public class NetworkFragment extends Fragment {
         }
     }
 
-    public BowlingScore parseResult(String result) {
+   /* public BowlingScore parseResult(String result) {
 
         BowlingScore bowlingScore=new BowlingScore();
         int maidens;
@@ -147,27 +148,34 @@ public class NetworkFragment extends Fragment {
           try {
               JSONObject resultObj = new JSONObject(result);
               JSONObject dataObj = resultObj.getJSONObject("data");
-              JsonArray matchBowlingArray = dataObj.getJSONArray("bowling");
-              JsonObject teamOneBowlingObj = matchBowlingArray.get(0);
-              JsonArray teamOneScoresArray = teamOneBowlingObj.getAsJsonArray("scores");
-              JsonObject teamOnePlayerOneBowlingObj = teamOneScoresArray.get(0);
+              JSONArray matchBowlingArray = dataObj.getJSONArray("bowling");
+              JSONObject teamOneBowlingObj = (JSONObject) matchBowlingArray.get(0);
+              JSONArray teamOneScoresArray = teamOneBowlingObj.getJSONArray("scores");
 
-             /* maidens= Integer.parseInt(ObjectBowling.getString("M"));
-              wickets= Integer.parseInt(ObjectBowling.getString("W"));
-              economy= Float.parseFloat(ObjectBowling.getString("Econ"));*/
-              bowlingScore.setMaidens(maidens);
-              bowlingScore.setWickets(wickets);
-              bowlingScore.setEconomy(economy);
+              JSONObject teamOnePlayerOneBowlingObj = (JSONObject) teamOneScoresArray.get(0);
+
+              for(int i=0;i<=teamOneBowlingObj.length();i++) {
+
+
+                  maidens = Integer.parseInt(teamOneBowlingObj.getString("M"));
+                  wickets = Integer.parseInt(teamOneBowlingObj.getString("W"));
+                  economy = Float.parseFloat(teamOneBowlingObj.getString("Econ"));
+                  bowlingScore.setMaidens(maidens);
+                  bowlingScore.setWickets(wickets);
+                  bowlingScore.setEconomy(economy);
+              }
 
           } catch (JSONException e) {
               e.printStackTrace();
           }
       }
-      
+
 
       return bowlingScore;
 
     }
+    */
+
 
     public void addParsedDataToFirebase() {
         incrementTeamTotalPoints("rahul-team", 8);
@@ -279,6 +287,7 @@ public class NetworkFragment extends Fragment {
                     String resultString = downloadUrl(url);
                     if (resultString != null) {
                         result = new Result(resultString);
+
                     } else {
                         throw new IOException("No response received.");
                     }
