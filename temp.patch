@@ -1,0 +1,106 @@
+Index: app/src/main/java/com/ringpi/cric/networkconnect/FirebaseUtils.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/ringpi/cric/networkconnect/FirebaseUtils.java	(revision 763b27d1f76b05fe62d23f0827af2e8ad39b579f)
++++ app/src/main/java/com/ringpi/cric/networkconnect/FirebaseUtils.java	(date 1598554773000)
+@@ -16,7 +16,7 @@
+ 
+     public ArrayList<Integer> getSquadPidList(String teamName) {
+         ArrayList<Integer> result = new ArrayList<>();
+-
++        result.add(new Integer("2001"));
+         return result;
+     }
+ }
+Index: app/src/main/java/com/ringpi/cric/networkconnect/AddMatchActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/ringpi/cric/networkconnect/AddMatchActivity.java	(revision 763b27d1f76b05fe62d23f0827af2e8ad39b579f)
++++ app/src/main/java/com/ringpi/cric/networkconnect/AddMatchActivity.java	(date 1598564757000)
+@@ -40,6 +40,7 @@
+ import com.ringpi.cric.R;
+ 
+ import java.util.ArrayList;
++import java.util.HashMap;
+ import java.util.List;
+ 
+ /**
+@@ -119,7 +120,22 @@
+       @Override
+       public void onClick(View view) {
+           PointsCalculations pc =new PointsCalculations();
+-          String mm = String.valueOf(pc.calculateBatsmanPoints(null));
++
++          ArrayList<Integer> pidList = new FirebaseUtils().getSquadPidList("rahul-team");
++
++          // Temporary Dummy obj
++
++          int runs = 21;
++          BattingScore battingScoreObj = new BattingScore(runs, 2, 0,
++                  Utils.isHalfCentury(runs), Utils.isCentury(runs),
++                  Utils.isDuck(runs));
++          HashMap<Integer, BattingScore> battingScoreHashMap = new HashMap<>();
++          battingScoreHashMap.put(new Integer(2001), battingScoreObj);
++          // Dummy object creation above to be deleted after json parsing.
++
++
++          String mm = String.valueOf(pc.calculateSquadPointsForGivenMatch(pidList,
++                  battingScoreHashMap, null, null));
+           Points.setText(mm);
+ 
+       }
+Index: app/src/main/java/com/ringpi/cric/networkconnect/PointsCalculations.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/ringpi/cric/networkconnect/PointsCalculations.java	(revision 763b27d1f76b05fe62d23f0827af2e8ad39b579f)
++++ app/src/main/java/com/ringpi/cric/networkconnect/PointsCalculations.java	(date 1598554906000)
+@@ -39,12 +39,7 @@
+ 
+     public float calculateBatsmanPoints(BattingScore battingScoreObj) {
+         float result = 0;
+-        // Temporary Dummy obj
+-        int runs = 21;
+-        battingScoreObj = new BattingScore(runs, 2, 0,
+-                Utils.isHalfCentury(runs), Utils.isCentury(runs),
+-                Utils.isDuck(runs));
+-        // Dummy object creation above to be deleted after json parsing.
++
+         // Calculate points using battingScoreObj and battingPointsHashmap.
+         result= result + battingScoreObj.runs * battingPointsMap.get("R");
+         result= result + battingScoreObj.noOfFours * battingPointsMap.get("4s");
+@@ -92,6 +87,9 @@
+ 
+         float totalBattingPoints = 0;
+         for (Integer squadMember : squadPidList) {
++            if (battingScoreHashMap == null) {
++                break;
++            }
+             BattingScore battingScoreObj = battingScoreHashMap.get(squadMember);
+             if ( battingScoreObj != null) {
+                 totalBattingPoints = totalBattingPoints + calculateBatsmanPoints(battingScoreObj);
+@@ -100,6 +98,9 @@
+ 
+         float totalBowlingPoints = 0;
+         for (Integer squadMember : squadPidList) {
++            if (bowlingScoreHashMap == null) {
++                break;
++            }
+             BowlingScore bowlingScoreObj = bowlingScoreHashMap.get(squadMember);
+             if ( bowlingScoreObj != null) {
+                 totalBowlingPoints = totalBowlingPoints + calculateBowlerPoints(bowlingScoreObj);
+@@ -108,6 +109,9 @@
+ 
+         float totalFieldingPoints = 0;
+         for (Integer squadMember : squadPidList) {
++            if (fieldingScoreHashMap == null) {
++                break;
++            }
+             FieldingScore fieldingScoreObj = fieldingScoreHashMap.get(squadMember);
+             if ( fieldingScoreObj != null) {
+                 totalFieldingPoints = totalFieldingPoints + calculateFieldingPoints(fieldingScoreObj);
