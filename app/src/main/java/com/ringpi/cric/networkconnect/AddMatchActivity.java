@@ -31,6 +31,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +42,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ringpi.cric.R;
+import com.ringpi.cric.squadpointscalculation.SquadpointsFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -130,15 +134,18 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
          /* PointsCalculations pc =new PointsCalculations();
           String mm = String.valueOf(pc.calculateBatsmanPoints(null));
           Points.setText(mm);
+*/
 
-        */
-          spinnerteam = spinner1.getSelectedItem().toString();
-         Intent intent=new Intent(AddMatchActivity.this,SquadPointsCalculation.class);
+         // spinnerteam = spinner1.getSelectedItem().toString();
+        /*Intent intent=new Intent(AddMatchActivity.this, SquadpointsFragment.class);
          intent.putExtra("jsonstring",mJsonstring);
          intent.putExtra("team",spinnerteam);
          startActivity(intent);
+*/
 
-
+          FragmentManager fm= getSupportFragmentManager();
+          SquadpointsFragment squadpointsFragment=new SquadpointsFragment();
+          fm.beginTransaction().replace(R.id.container,squadpointsFragment).commit();
 
 
       }
