@@ -65,6 +65,7 @@ public class PointsCalculations {
 
     public float calculateBowlerPoints(BowlingScore bowlingScoreObj) {
         float result = 0;
+
         bowlingScoreObj =new BowlingScore(3,3, (float) 5.2);
         result =result+bowlingScoreObj.maidens*bowlingPointsMap.get("M");
         result =result+bowlingScoreObj.wickets*bowlingPointsMap.get("W");
