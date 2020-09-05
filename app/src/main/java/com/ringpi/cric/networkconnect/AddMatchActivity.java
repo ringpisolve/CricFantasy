@@ -17,6 +17,7 @@
 package com.ringpi.cric.networkconnect;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -122,9 +123,13 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
   calpoints.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-          PointsCalculations pc =new PointsCalculations();
+         /* PointsCalculations pc =new PointsCalculations();
           String mm = String.valueOf(pc.calculateBatsmanPoints(null));
           Points.setText(mm);
+
+        */
+         Intent intent=new Intent(AddMatchActivity.this,SquadPointsCalculation.class);
+         startActivity(intent);
 
 
 
