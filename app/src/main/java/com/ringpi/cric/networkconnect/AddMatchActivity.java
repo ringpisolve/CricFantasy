@@ -126,6 +126,9 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
           String mm = String.valueOf(pc.calculateBatsmanPoints(null));
           Points.setText(mm);
 
+
+
+
       }
   });
 
@@ -183,7 +186,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
             int wickets;
             float economy;
 
-            
+
                 try {
                     JSONObject resultObj = new JSONObject(result);
                     JSONObject dataObj = resultObj.getJSONObject("data");
