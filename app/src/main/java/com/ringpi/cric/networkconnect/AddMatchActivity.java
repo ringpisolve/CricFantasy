@@ -69,6 +69,9 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     private boolean mDownloading = false;
     private Button calpoints;
     private TextView Points;
+    private String mJsonstring;
+    private String spinnerteam;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +104,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
         FirebaseFirestore rootRef1 = FirebaseFirestore.getInstance();
         CollectionReference subjectsRef1 = rootRef1.collection("team-list");
         Spinner spinner1 = (Spinner) findViewById(R.id.spinner2);
+
         List<String> subjects1 = new ArrayList<>();
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, subjects1);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -128,7 +132,10 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
           Points.setText(mm);
 
         */
+          spinnerteam = spinner1.getSelectedItem().toString();
          Intent intent=new Intent(AddMatchActivity.this,SquadPointsCalculation.class);
+         intent.putExtra("jsonstring",mJsonstring);
+         intent.putExtra("team",spinnerteam);
          startActivity(intent);
 
 
@@ -185,7 +192,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
         if (result != null) {
             mDataText.setText(result);
 
-
+           mJsonstring=result;
             BowlingScore bowlingScore=new BowlingScore();
             int maidens;
             int wickets;
