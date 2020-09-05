@@ -19,7 +19,7 @@ public class FirebaseUtils {
                 .document(teamName);
     }
 
-    public ArrayList<Integer> getSquadPidList(String teamName) {
+    public ArrayList<Integer> getPlayingElevenPIDList(String teamName) {
         ArrayList<Integer> result = new ArrayList<>();
 
         return result;
