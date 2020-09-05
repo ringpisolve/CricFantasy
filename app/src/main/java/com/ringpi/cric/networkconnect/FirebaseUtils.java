@@ -28,8 +28,8 @@ public class FirebaseUtils {
                 .document(teamName);
     }
 
-    public List<String> getPlayingElevenPIDList(String teamName) {
-        List<String> list = new ArrayList<>();
+    public ArrayList<Integer> getPlayingElevenPIDList(String teamName) {
+        ArrayList<Integer> list = new ArrayList<>();
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
 
         rootRef.collection("leagues/kc-league/teams/rahul-team/playing11")
@@ -41,7 +41,7 @@ public class FirebaseUtils {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                     String ss = document.getString("pid");
-                                    list.add(ss);
+                                    list.add(Integer.valueOf(ss));
 
                                     Log.d("TAG", ss);
 
