@@ -28,6 +28,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -133,21 +134,17 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
       public void onClick(View view) {
          /* PointsCalculations pc =new PointsCalculations();
           String mm = String.valueOf(pc.calculateBatsmanPoints(null));
-          Points.setText(mm);
-*/
+          Points.setText(mm); */
 
-         // spinnerteam = spinner1.getSelectedItem().toString();
-        /*Intent intent=new Intent(AddMatchActivity.this, SquadpointsFragment.class);
-         intent.putExtra("jsonstring",mJsonstring);
-         intent.putExtra("team",spinnerteam);
-         startActivity(intent);
-*/
-
-          FragmentManager fm= getSupportFragmentManager();
-          SquadpointsFragment squadpointsFragment=new SquadpointsFragment();
-          fm.beginTransaction().replace(R.id.container,squadpointsFragment).commit();
-
-
+          if (mJsonstring == null) {
+              Toast toast = Toast.makeText(getBaseContext(),
+                      "Fetch selected match data and try again.", Toast.LENGTH_LONG);
+              toast.show();
+          } else {
+              Toast toast = Toast.makeText(getBaseContext(),
+                      "See the total points", Toast.LENGTH_LONG);
+              toast.show();
+          }
       }
   });
 
@@ -198,6 +195,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     public void updateFromDownload(String result) {
         if (result != null) {
             mDataText.setText("Data successfully fetched!");
+            mJsonstring = result;
 
            mJsonstring=result;
             BowlingScore bowlingScore=new BowlingScore();
