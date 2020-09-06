@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text="@string/fetch_text"
+                        android:text="@string/search_player_button_text"
                         style="?attr/borderlessButtonStyle"
                         />
                 </LinearLayout>
