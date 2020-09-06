@@ -80,7 +80,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sample_main);
+        setContentView(R.layout.add_match);
         mDataText = (TextView) findViewById(R.id.data_text);
         mFetchButton = (Button) findViewById(R.id.fetch_button);
         calpoints =(Button) findViewById(R.id.cal_points);
