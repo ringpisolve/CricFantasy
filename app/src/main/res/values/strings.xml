@@ -31,4 +31,5 @@
     <string name="select_team">Select Team</string>
     <string name="total_points_text">Total Fantasy Points</string>
     <string name="search_player_text">Search Player</string>
+    <string name="AddMatch">Add Match</string>
 </resources>
