@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,11 +68,10 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference subjectsRef = rootRef.collection("matches");
-        Spinner spinner = (Spinner) findViewById(R.id.spinner1player);
+        EditText searchEditText = findViewById(R.id.search_player_edittext);
         List<String> subjects = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, subjects);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
         subjectsRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -140,7 +140,7 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
                 startDownload();
             }
         });
-        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/fantasySummary?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&unique_id=1227889");
+        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/playerFinder?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&name=Tendulkar");
     }
 
     @Override
