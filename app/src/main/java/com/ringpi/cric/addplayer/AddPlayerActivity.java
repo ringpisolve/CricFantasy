@@ -60,7 +60,7 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_player);
+        setContentView(R.layout.add_player);
         mDataText = (TextView) findViewById(R.id.data_textplayer);
         mFetchButton = (Button) findViewById(R.id.fetch_buttonplayer);
         calpoints =(Button) findViewById(R.id.cal_pointsplayer);
