@@ -24,7 +24,7 @@ class MyListAdapter(var mCtx:Context , var resource:Int,var items:List<Model>)
 
         var person : Model = items[position]
 
-        imageView.setImageDrawable(mCtx.resources.getDrawable(person.photo))
+        imageView.setImageDrawable(mCtx.resources.getDrawable(R.drawable.ic_account_circle))
         textView.text = person.title
         textView1.text = person.desc
 
