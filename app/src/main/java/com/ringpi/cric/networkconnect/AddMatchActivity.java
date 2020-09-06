@@ -78,7 +78,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     private TextView Points;
     private String mJsonstring;
     private Object spinnermatch;
-    private HashMap hashMap;
+    private HashMap<String, String> mMatchDataMap = null;
 
 
     @Override
@@ -103,11 +103,11 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
                 if (task.isSuccessful()) {
                     subjects.add("Select Match here");
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        String subject = document.getString("fixture");
+                        String matchName = document.getString("fixture");
                         String matchid=document.getString("matchid");
-                        HashMap<String,String> hashMap= new HashMap<String, String>();
-                        hashMap.put(subject,matchid);
-                        subjects.add(subject);
+                        mMatchDataMap= new HashMap<String, String>();
+                        mMatchDataMap.put(matchName,matchid);
+                        subjects.add(matchName);
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -138,26 +138,26 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
 
 
 
-  calpoints.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-         /* PointsCalculations pc =new PointsCalculations();
-          String mm = String.valueOf(pc.calculateBatsmanPoints(null));
-          Points.setText(mm); */
+          calpoints.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                 /* PointsCalculations pc =new PointsCalculations();
+                  String mm = String.valueOf(pc.calculateBatsmanPoints(null));
+                  Points.setText(mm); */
 
-          if (mJsonstring == null) {
-              Toast toast = Toast.makeText(getBaseContext(),
-                      "Fetch selected match data and try again.", Toast.LENGTH_LONG);
-              toast.show();
-          } else {
-              Toast toast = Toast.makeText(getBaseContext(),
-                      "See the total points", Toast.LENGTH_LONG);
-              toast.show();
-          }
-          Intent intent=new Intent(AddMatchActivity.this,SquadPointsCalculation.class);
-          startActivity(intent);
-      }
-  });
+                  if (mJsonstring == null) {
+                      Toast toast = Toast.makeText(getBaseContext(),
+                              "Fetch selected match data and try again.", Toast.LENGTH_LONG);
+                      toast.show();
+                  } else {
+                      Toast toast = Toast.makeText(getBaseContext(),
+                              "See the total points", Toast.LENGTH_LONG);
+                      toast.show();
+                  }
+                  Intent intent=new Intent(AddMatchActivity.this,SquadPointsCalculation.class);
+                  startActivity(intent);
+              }
+          });
 
 
 
@@ -168,11 +168,11 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
         mFetchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String matchid= mMatchDataMap.get(spinnermatch);
+                mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/fantasySummary?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&unique_id="+matchid);
                 startDownload();
             }
         });
-       String matchid= hashMap.get(spinnermatch).toString();
-        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/fantasySummary?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&unique_id="+matchid);
     }
 
     @Override
