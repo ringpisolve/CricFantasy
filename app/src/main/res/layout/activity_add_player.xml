@@ -30,15 +30,27 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/select_match"
+                        android:text="@string/search_player_text"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         />
 
-                    <Spinner
-                        android:id="@+id/spinner1player"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        />
+                        android:layout_height="wrap_content"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/search_player_edittext"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginLeft="10dp"
+                            android:hint="Search Player"/>
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
