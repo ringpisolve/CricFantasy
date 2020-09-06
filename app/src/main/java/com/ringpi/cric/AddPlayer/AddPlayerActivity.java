@@ -37,7 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddPlayerActivity extends AppCompatActivity {
+public class AddPlayerActivity extends AppCompatActivity implements DownloadCallback1 {
 
     // Reference to the TextView showing fetched data, so we can clear it with a button
     // as necessary.
