@@ -19,11 +19,9 @@ class FantasyPointsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_squad_points_calculation)
-        /*val intent: Intent = intent
+        val intent: Intent = intent
         var jsonstring = intent.getStringExtra("jsonstring")
         var team = intent.getStringExtra("team")
-       textView2.text = jsonstring
-       */
 
 
         val fm: FragmentManager = supportFragmentManager

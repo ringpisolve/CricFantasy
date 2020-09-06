@@ -151,6 +151,9 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
                       toast.show();
                   }
                   Intent intent=new Intent(AddMatchActivity.this, FantasyPointsActivity.class);
+                  intent.putExtra("jsonstring", mJsonstring);
+                  intent.putExtra("team", String.valueOf(spinner1.getSelectedItem()));
+
                   startActivity(intent);
               }
           });

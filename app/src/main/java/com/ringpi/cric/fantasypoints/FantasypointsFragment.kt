@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.TextView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ringpi.cric.R
 
@@ -20,6 +21,8 @@ class FantasypointsFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.squadpoints_fragment, container, false)
         val view: View = inflater.inflate(R.layout.squadpoints_fragment, container, false)
+        val teamName: TextView = view.findViewById(R.id.team_name)
+        teamName.setText("show team name here.")
 
         val mFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
