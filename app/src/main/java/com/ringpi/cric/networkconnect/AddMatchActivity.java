@@ -147,6 +147,8 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
                       "See the total points", Toast.LENGTH_LONG);
               toast.show();
           }
+          Intent intent=new Intent(AddMatchActivity.this,SquadPointsCalculation.class);
+          startActivity(intent);
       }
   });
 
