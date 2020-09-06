@@ -49,7 +49,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.CookieHandler;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -75,7 +77,9 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     private Button calpoints;
     private TextView Points;
     private String mJsonstring;
-    private String spinnerteam;
+    private Object spinnermatch;
+    private HashMap hashMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +104,9 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
                     subjects.add("Select Match here");
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String subject = document.getString("fixture");
+                        String matchid=document.getString("matchid");
+                        HashMap<String,String> hashMap= new HashMap<String, String>();
+                        hashMap.put(subject,matchid);
                         subjects.add(subject);
                     }
                     adapter.notifyDataSetChanged();
@@ -155,13 +162,17 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
 
 
 
+
+       spinnermatch = spinner.getSelectedItem();
+
         mFetchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startDownload();
             }
         });
-        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/fantasySummary?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&unique_id=1227889");
+       String matchid= hashMap.get(spinnermatch).toString();
+        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/fantasySummary?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&unique_id="+matchid);
     }
 
     @Override
