@@ -9,7 +9,7 @@ import android.widget.ListView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ringpi.cric.R
 
-class SquadpointsFragment : Fragment() {
+class FantasypointsFragment : Fragment() {
 
     lateinit var listView : ListView
 
