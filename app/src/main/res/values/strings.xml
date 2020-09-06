@@ -24,7 +24,9 @@
     <string name="your_squad_text">Your Squad</string>
     <string name="calculate_points">Calculate points</string>
     <string name="show_fantasy_points">Show Fantasy Points</string>
+    <string name="save_points_to_firebase">Save Points to Firebase </string>
     <string name="select_match_label">Select Match below</string>
     <string name="select_team_label">Select team below</string>
     <string name="select_team">Select Team</string>
+    <string name="total_points_text">Total Fantasy Points</string>
 </resources>
