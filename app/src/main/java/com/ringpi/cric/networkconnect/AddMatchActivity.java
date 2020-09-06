@@ -197,7 +197,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     @Override
     public void updateFromDownload(String result) {
         if (result != null) {
-            mDataText.setText(result);
+            mDataText.setText("Data successfully fetched!");
 
            mJsonstring=result;
             BowlingScore bowlingScore=new BowlingScore();
