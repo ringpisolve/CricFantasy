@@ -15,7 +15,8 @@
         <activity android:name=".AddPlayer.AddPlayerActivity">
 
         </activity>
-        <activity android:name=".networkconnect.SquadPointsCalculation"
+        <activity android:name=".fantasypoints.FantasyPointsActivity"
+            android:label="@string/fantasy_points"
             android:parentActivityName=".networkconnect.AddMatchActivity"
             ></activity>
         <activity

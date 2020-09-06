@@ -32,9 +32,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,13 +40,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ringpi.cric.R;
-import com.ringpi.cric.squadpointscalculation.SquadpointsFragment;
+import com.ringpi.cric.fantasypoints.FantasyPointsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.CookieHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -154,7 +150,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
                               "See the total points", Toast.LENGTH_LONG);
                       toast.show();
                   }
-                  Intent intent=new Intent(AddMatchActivity.this,SquadPointsCalculation.class);
+                  Intent intent=new Intent(AddMatchActivity.this, FantasyPointsActivity.class);
                   startActivity(intent);
               }
           });

@@ -1,6 +1,5 @@
-package com.ringpi.cric.squadpointscalculation
+package com.ringpi.cric.fantasypoints
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +8,6 @@ import android.view.ViewGroup
 import android.widget.ListView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ringpi.cric.R
-import com.ringpi.cric.ui.home.Model
-import com.ringpi.cric.ui.home.MyListAdapter
 
 class SquadpointsFragment : Fragment() {
 

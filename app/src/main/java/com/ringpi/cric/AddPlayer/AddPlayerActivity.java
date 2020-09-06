@@ -25,11 +25,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ringpi.cric.R;
-import com.ringpi.cric.networkconnect.AddMatchActivity;
+import com.ringpi.cric.fantasypoints.FantasyPointsActivity;
 import com.ringpi.cric.networkconnect.BowlingScore;
 import com.ringpi.cric.networkconnect.DownloadCallback;
 import com.ringpi.cric.networkconnect.NetworkFragment;
-import com.ringpi.cric.networkconnect.SquadPointsCalculation;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -126,7 +126,7 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
                             "See the total points", Toast.LENGTH_LONG);
                     toast.show();
                 }
-                Intent intent=new Intent(AddPlayerActivity.this, SquadPointsCalculation.class);
+                Intent intent=new Intent(AddPlayerActivity.this, FantasyPointsActivity.class);
                 startActivity(intent);
             }
         });

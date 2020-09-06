@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".networkconnect.SquadPointsCalculation">
+    tools:context=".fantasypoints.FantasyPointsActivity">
 
     <TextView
         android:id="@+id/textView2"

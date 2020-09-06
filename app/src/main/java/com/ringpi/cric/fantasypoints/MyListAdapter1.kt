@@ -1,4 +1,4 @@
-package com.ringpi.cric.squadpointscalculation
+package com.ringpi.cric.fantasypoints
 
 import android.content.Context
 import android.view.LayoutInflater
