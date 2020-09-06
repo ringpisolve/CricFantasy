@@ -24,5 +24,9 @@
             android:id="@+id/nav_addmatch"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/add_match" />
+        <item
+            android:id="@+id/nav_addplayer"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Add Player" />
     </group>
 </menu>

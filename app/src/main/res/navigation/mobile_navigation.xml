@@ -34,5 +34,11 @@
         android:label="@string/add_match"
         tools:layout="@layout/sample_main"
         />
+    <activity
+        android:id="@+id/nav_addplayer"
+        android:name="com.ringpi.cric.AddPlayer.AddPlayerActivity"
+        android:label="Add Player"
+        tools:layout="@layout/activity_add_player"
+        />
 
 </navigation>
