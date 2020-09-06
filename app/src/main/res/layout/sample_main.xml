@@ -68,7 +68,7 @@
         android:id="@+id/cal_points"
         android:layout_width="397dp"
         android:layout_height="54dp"
-        android:text="@string/calculate_points" />
+        android:text="@string/show_fantasy_points" />
     <TextView
         android:id="@+id/points"
         android:layout_width="match_parent"

@@ -83,4 +83,22 @@ public class Utils {
         return result;
 
     }
+
+    public void parseSquadPlayingInCurrentMatch(ArrayList<Integer> squadPlayingInCurrentMatch,
+                                           String jsonString) {
+
+
+    }
+
+    public void getBowlingFantasyData(ArrayList<Integer> squadPlayingInCurrentMatch, JSONArray bowlingArray) {
+
+    }
+
+    public void getBattingFantasyData(ArrayList<Integer> squadPlayingInCurrentMatch, JSONArray battingArray) {
+
+    }
+
+    public void getFieldingFantasyData(ArrayList<Integer> squadPlayingInCurrentMatch, JSONArray fieldingArray) {
+
+    }
 }
