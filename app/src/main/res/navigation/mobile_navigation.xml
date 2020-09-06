@@ -36,7 +36,7 @@
         />
     <activity
         android:id="@+id/nav_addplayer"
-        android:name="com.ringpi.cric.AddPlayer.AddPlayerActivity"
+        android:name="com.ringpi.cric.addplayer.AddPlayerActivity"
         android:label="Add Player"
         tools:layout="@layout/activity_add_player"
         />

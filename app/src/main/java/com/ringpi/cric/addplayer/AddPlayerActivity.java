@@ -1,4 +1,4 @@
-package com.ringpi.cric.AddPlayer;
+package com.ringpi.cric.addplayer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
