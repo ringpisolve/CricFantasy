@@ -32,7 +32,7 @@ class FantasypointsFragment : Fragment() {
         list.add(Model1("Title Four",  "Description Four...",  R.mipmap.ic_launcher_round  ))
         list.add(Model1("Title Five",  "Description Five...",  R.mipmap.ic_launcher  ))
 
-        listView.adapter = context?.let { FantasyPointsAdapter(it,R.layout.row2,list) }
+        listView.adapter = context?.let { FantasyPointsAdapter(it,R.layout.fantasy_points_list_item,list) }
 
 
         return view
