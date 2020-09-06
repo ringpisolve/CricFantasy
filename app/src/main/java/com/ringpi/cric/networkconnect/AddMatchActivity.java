@@ -97,7 +97,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    subjects.add("Select Match");
+                    subjects.add("Select Match here");
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String subject = document.getString("fixture");
                         subjects.add(subject);
@@ -119,6 +119,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
+                    subjects1.add("Select Team here");
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String subject1 = document.getString("name");
                         subjects1.add(subject1);
