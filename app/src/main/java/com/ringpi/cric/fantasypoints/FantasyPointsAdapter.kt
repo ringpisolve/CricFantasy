@@ -25,7 +25,7 @@ class FantasyPointsAdapter(var mCtx: Context, var resource:Int, var items:List<P
 
         var person : PlayerPointsData = items[position]
 
-        imageView.setImageDrawable(mCtx.resources.getDrawable(person.photo))
+        imageView.setImageDrawable(mCtx.resources.getDrawable(R.drawable.ic_account_circle))
         textView.text = person.playerName
         textView1.text = person.desc
 
