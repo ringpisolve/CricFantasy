@@ -25,12 +25,6 @@
         android:textSize="24sp"
         android:text="@string/step_one"
         />
-    <TextView
-        android:id="@+id/select_match"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="@string/select_match_label"
-        />
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
@@ -57,14 +51,6 @@
         android:layout_height="50dp"
         android:textSize="24sp"
         android:text="@string/step_two"
-        />
-
-    <TextView
-        android:id="@+id/select_team"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="@string/select_team_label"
-
         />
     <Spinner
         android:id="@+id/spinner2"
