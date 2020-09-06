@@ -37,7 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddPlayerActivity extends AppCompatActivity implements DownloadCallback1 {
+public class AddPlayerActivity extends AppCompatActivity implements DownloadCallback {
 
     // Reference to the TextView showing fetched data, so we can clear it with a button
     // as necessary.
@@ -137,7 +137,7 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
         mFetchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startDownload1();
+                startDownload();
             }
         });
         mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/fantasySummary?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&unique_id=1227889");
@@ -155,18 +155,18 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
             // When the user clicks FETCH, fetch the first 500 characters of
             // raw HTML from www.google.com.
             case R.id.fetch_action:
-                startDownload1();
+                startDownload();
                 return true;
             // Clear the text and cancel download.
             case R.id.clear_action:
-                finishDownloading1();
+                finishDownloading();
                 mDataText.setText("");
                 return true;
         }
         return false;
     }
 
-    private void startDownload1() {
+    private void startDownload() {
         if (!mDownloading && mNetworkFragment != null) {
             // Execute the async download.
             mNetworkFragment.startDownload();
@@ -175,7 +175,7 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
     }
 
     @Override
-    private void updateFromDownload1(String result) {
+    public void updateFromDownload(String result) {
         if (result != null) {
             mDataText.setText("Data successfully fetched!");
             mJsonstring = result;
@@ -220,7 +220,7 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
     }
 
     @Override
-    public NetworkInfo getActiveNetworkInfo1() {
+    public NetworkInfo getActiveNetworkInfo() {
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -228,7 +228,7 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
     }
 
     @Override
-    public void finishDownloading1() {
+    public void finishDownloading() {
         mDownloading = false;
         if (mNetworkFragment != null) {
             mNetworkFragment.cancelDownload();
@@ -236,19 +236,19 @@ public class AddPlayerActivity extends AppCompatActivity implements DownloadCall
     }
 
     @Override
-    public void onProgressUpdate1(int progressCode, int percentComplete) {
+    public void onProgressUpdate(int progressCode, int percentComplete) {
         switch(progressCode) {
             // You can add UI behavior for progress updates here.
-            case DownloadCallback1.Progress.ERROR:
+            case DownloadCallback.Progress.ERROR:
                 break;
-            case DownloadCallback1.Progress.CONNECT_SUCCESS:
+            case DownloadCallback.Progress.CONNECT_SUCCESS:
                 break;
-            case DownloadCallback1.Progress.GET_INPUT_STREAM_SUCCESS:
+            case DownloadCallback.Progress.GET_INPUT_STREAM_SUCCESS:
                 break;
-            case DownloadCallback1.Progress.PROCESS_INPUT_STREAM_IN_PROGRESS:
+            case DownloadCallback.Progress.PROCESS_INPUT_STREAM_IN_PROGRESS:
                 mDataText.setText("" + percentComplete + "%");
                 break;
-            case DownloadCallback1.Progress.PROCESS_INPUT_STREAM_SUCCESS:
+            case DownloadCallback.Progress.PROCESS_INPUT_STREAM_SUCCESS:
                 break;
         }
     }
