@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.ringpi.cric.R
 
 
-class MyListAdapter1(var mCtx: Context, var resource:Int, var items:List<Model1>)
+class FantasyPointsAdapter(var mCtx: Context, var resource:Int, var items:List<Model1>)
     : ArrayAdapter<Model1>( mCtx , resource , items ){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
