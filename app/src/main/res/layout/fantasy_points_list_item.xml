@@ -18,7 +18,7 @@
         android:layout_gravity="center"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/titleTv1"
+            android:id="@+id/player_name_tv"
             android:text="Title"
             android:textSize="15sp"
             android:layout_width="match_parent"

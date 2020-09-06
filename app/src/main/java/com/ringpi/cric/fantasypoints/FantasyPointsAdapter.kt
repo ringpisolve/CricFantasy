@@ -19,14 +19,14 @@ class FantasyPointsAdapter(var mCtx: Context, var resource:Int, var items:List<P
 
         val view : View = layoutInflater.inflate(resource , null )
         val imageView : ImageView = view.findViewById(R.id.iconIv1)
-        var textView : TextView = view.findViewById(R.id.titleTv1)
+        var textView : TextView = view.findViewById(R.id.player_name_tv)
         var textView1 : TextView = view.findViewById(R.id.descTv1)
 
 
         var person : PlayerPointsData = items[position]
 
         imageView.setImageDrawable(mCtx.resources.getDrawable(person.photo))
-        textView.text = person.title
+        textView.text = person.playerName
         textView1.text = person.desc
 
 
