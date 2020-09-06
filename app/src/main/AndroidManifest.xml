@@ -12,13 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AddPlayer.AddPlayerActivity">
 
+        </activity>
+        <activity android:name=".networkconnect.SquadPointsCalculation"></activity>
         <activity
             android:name=".squad.SquadActivity"
             android:label="@string/your_squad_text"
-            android:parentActivityName=".MainActivity">
-
-        </activity>
+            android:parentActivityName=".MainActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".MainActivity"
@@ -35,13 +36,7 @@
             android:name=".networkconnect.AddMatchActivity"
             android:label="@string/calculate_points"
             android:parentActivityName=".MainActivity"
-            android:uiOptions="splitActionBarWhenNarrow">
-
-        </activity>
-        <activity android:name=".networkconnect.SquadPointsCalculation"
-            android:parentActivityName=".networkconnect.AddMatchActivity">
-
-        </activity>
+            android:uiOptions="splitActionBarWhenNarrow"></activity>
     </application>
 
 </manifest>

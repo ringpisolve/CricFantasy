@@ -1,20 +1,7 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+package com.ringpi.cric.AddPlayer;
 
-package com.ringpi.cric.networkconnect;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,15 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,24 +25,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.ringpi.cric.R;
-import com.ringpi.cric.squadpointscalculation.SquadpointsFragment;
+import com.ringpi.cric.networkconnect.AddMatchActivity;
+import com.ringpi.cric.networkconnect.BowlingScore;
+import com.ringpi.cric.networkconnect.DownloadCallback;
+import com.ringpi.cric.networkconnect.NetworkFragment;
+import com.ringpi.cric.networkconnect.SquadPointsCalculation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.CookieHandler;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-/**
- * Sample Activity demonstrating how to connect to the network and fetch raw
- * HTML. It uses a Fragment that encapsulates the network operations on an AsyncTask.
- *
- * This sample uses a TextView to display output.
- */
-public class AddMatchActivity extends AppCompatActivity implements DownloadCallback {
+public class AddPlayerActivity extends AppCompatActivity implements DownloadCallback {
 
     // Reference to the TextView showing fetched data, so we can clear it with a button
     // as necessary.
@@ -77,37 +55,31 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     private Button calpoints;
     private TextView Points;
     private String mJsonstring;
-    private Object spinnermatch;
-    private HashMap<String, String> mMatchDataMap = null;
-
+    private String spinnerteam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sample_main);
-        mDataText = (TextView) findViewById(R.id.data_text);
-        mFetchButton = (Button) findViewById(R.id.fetch_button);
-        calpoints =(Button) findViewById(R.id.cal_points);
-       Points=(TextView) findViewById(R.id.points);
+        setContentView(R.layout.activity_add_player);
+        mDataText = (TextView) findViewById(R.id.data_textplayer);
+        mFetchButton = (Button) findViewById(R.id.fetch_buttonplayer);
+        calpoints =(Button) findViewById(R.id.cal_pointsplayer);
+        Points=(TextView) findViewById(R.id.pointsplayer);
 
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
         CollectionReference subjectsRef = rootRef.collection("matches");
-        Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+        EditText searchEditText = findViewById(R.id.search_player_edittext);
         List<String> subjects = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, subjects);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
         subjectsRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     subjects.add("Select Match here");
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        String matchName = document.getString("fixture");
-                        String matchid=document.getString("matchid");
-                        mMatchDataMap= new HashMap<String, String>();
-                        mMatchDataMap.put(matchName,matchid);
-                        subjects.add(matchName);
+                        String subject = document.getString("fixture");
+                        subjects.add(subject);
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -116,7 +88,7 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
 
         FirebaseFirestore rootRef1 = FirebaseFirestore.getInstance();
         CollectionReference subjectsRef1 = rootRef1.collection("team-list");
-        Spinner spinner1 = (Spinner) findViewById(R.id.spinner2);
+        Spinner spinner1 = (Spinner) findViewById(R.id.spinner2player);
 
         List<String> subjects1 = new ArrayList<>();
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, subjects1);
@@ -138,41 +110,37 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
 
 
 
-          calpoints.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                 /* PointsCalculations pc =new PointsCalculations();
-                  String mm = String.valueOf(pc.calculateBatsmanPoints(null));
-                  Points.setText(mm); */
+        calpoints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+         /* PointsCalculations pc =new PointsCalculations();
+          String mm = String.valueOf(pc.calculateBatsmanPoints(null));
+          Points.setText(mm); */
 
-                  if (mJsonstring == null) {
-                      Toast toast = Toast.makeText(getBaseContext(),
-                              "Fetch selected match data and try again.", Toast.LENGTH_LONG);
-                      toast.show();
-                  } else {
-                      Toast toast = Toast.makeText(getBaseContext(),
-                              "See the total points", Toast.LENGTH_LONG);
-                      toast.show();
-                  }
-                  Intent intent=new Intent(AddMatchActivity.this,SquadPointsCalculation.class);
-                  startActivity(intent);
-              }
-          });
-
-
+                if (mJsonstring == null) {
+                    Toast toast = Toast.makeText(getBaseContext(),
+                            "Fetch selected match data and try again.", Toast.LENGTH_LONG);
+                    toast.show();
+                } else {
+                    Toast toast = Toast.makeText(getBaseContext(),
+                            "See the total points", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                Intent intent=new Intent(AddPlayerActivity.this, SquadPointsCalculation.class);
+                startActivity(intent);
+            }
+        });
 
 
 
-       spinnermatch = spinner.getSelectedItem();
 
         mFetchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String matchid= mMatchDataMap.get(spinnermatch);
-                mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/fantasySummary?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&unique_id="+matchid);
                 startDownload();
             }
         });
+        mNetworkFragment = NetworkFragment.getInstance(getSupportFragmentManager(), "https://cricapi.com/api/playerFinder?apikey=dA5xK2fQ47hbInUkC4413UMwIwh2&name=Tendulkar");
     }
 
     @Override
@@ -212,36 +180,36 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
             mDataText.setText("Data successfully fetched!");
             mJsonstring = result;
 
-           mJsonstring=result;
+            mJsonstring=result;
             BowlingScore bowlingScore=new BowlingScore();
             int maidens;
             int wickets;
             float economy;
 
 
-                try {
-                    JSONObject resultObj = new JSONObject(result);
-                    JSONObject dataObj = resultObj.getJSONObject("data");
-                    JSONArray matchBowlingArray = dataObj.getJSONArray("bowling");
-                    JSONObject teamOneBowlingObj = (JSONObject) matchBowlingArray.get(0);
-                    JSONArray teamOneScoresArray = teamOneBowlingObj.getJSONArray("scores");
+            try {
+                JSONObject resultObj = new JSONObject(result);
+                JSONObject dataObj = resultObj.getJSONObject("data");
+                JSONArray matchBowlingArray = dataObj.getJSONArray("bowling");
+                JSONObject teamOneBowlingObj = (JSONObject) matchBowlingArray.get(0);
+                JSONArray teamOneScoresArray = teamOneBowlingObj.getJSONArray("scores");
 
 
 
-                    for(int i=0;i<=teamOneBowlingObj.length();i++) {
+                for(int i=0;i<=teamOneBowlingObj.length();i++) {
 
-                        JSONObject teamOnePlayerOneBowlingObj = (JSONObject) teamOneScoresArray.get(i);
-                        maidens = Integer.parseInt(teamOnePlayerOneBowlingObj.getString("M"));
-                        wickets = Integer.parseInt(teamOnePlayerOneBowlingObj.getString("W"));
-                        economy = Float.parseFloat(teamOnePlayerOneBowlingObj.getString("Econ"));
-                        bowlingScore.setMaidens(maidens);
-                        bowlingScore.setWickets(wickets);
-                        bowlingScore.setEconomy(economy);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    JSONObject teamOnePlayerOneBowlingObj = (JSONObject) teamOneScoresArray.get(i);
+                    maidens = Integer.parseInt(teamOnePlayerOneBowlingObj.getString("M"));
+                    wickets = Integer.parseInt(teamOnePlayerOneBowlingObj.getString("W"));
+                    economy = Float.parseFloat(teamOnePlayerOneBowlingObj.getString("Econ"));
+                    bowlingScore.setMaidens(maidens);
+                    bowlingScore.setWickets(wickets);
+                    bowlingScore.setEconomy(economy);
                 }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
 
@@ -271,16 +239,16 @@ public class AddMatchActivity extends AppCompatActivity implements DownloadCallb
     public void onProgressUpdate(int progressCode, int percentComplete) {
         switch(progressCode) {
             // You can add UI behavior for progress updates here.
-            case Progress.ERROR:
+            case DownloadCallback.Progress.ERROR:
                 break;
-            case Progress.CONNECT_SUCCESS:
+            case DownloadCallback.Progress.CONNECT_SUCCESS:
                 break;
-            case Progress.GET_INPUT_STREAM_SUCCESS:
+            case DownloadCallback.Progress.GET_INPUT_STREAM_SUCCESS:
                 break;
-            case Progress.PROCESS_INPUT_STREAM_IN_PROGRESS:
+            case DownloadCallback.Progress.PROCESS_INPUT_STREAM_IN_PROGRESS:
                 mDataText.setText("" + percentComplete + "%");
                 break;
-            case Progress.PROCESS_INPUT_STREAM_SUCCESS:
+            case DownloadCallback.Progress.PROCESS_INPUT_STREAM_SUCCESS:
                 break;
         }
     }
