@@ -24,13 +24,13 @@ class FantasypointsFragment : Fragment() {
         val mFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
         listView = view.findViewById(R.id.study_level_list1)
-        var list = mutableListOf<Model1>()
+        var list = mutableListOf<PlayerPointsData>()
 
-        list.add(Model1("Title 1",   "Description One...",   R.mipmap.ic_launcher  ))
-        list.add(Model1("Title Two",   "Description Two...",   R.mipmap.ic_launcher_round  ))
-        list.add(Model1("Title Three", "Description Three...", R.mipmap.ic_launcher  ))
-        list.add(Model1("Title Four",  "Description Four...",  R.mipmap.ic_launcher_round  ))
-        list.add(Model1("Title Five",  "Description Five...",  R.mipmap.ic_launcher  ))
+        list.add(PlayerPointsData("Title 1",   "Description One...",   R.mipmap.ic_launcher  ))
+        list.add(PlayerPointsData("Title Two",   "Description Two...",   R.mipmap.ic_launcher_round  ))
+        list.add(PlayerPointsData("Title Three", "Description Three...", R.mipmap.ic_launcher  ))
+        list.add(PlayerPointsData("Title Four",  "Description Four...",  R.mipmap.ic_launcher_round  ))
+        list.add(PlayerPointsData("Title Five",  "Description Five...",  R.mipmap.ic_launcher  ))
 
         listView.adapter = context?.let { FantasyPointsAdapter(it,R.layout.fantasy_points_list_item,list) }
 

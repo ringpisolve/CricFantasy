@@ -10,8 +10,8 @@ import android.widget.TextView
 import com.ringpi.cric.R
 
 
-class FantasyPointsAdapter(var mCtx: Context, var resource:Int, var items:List<Model1>)
-    : ArrayAdapter<Model1>( mCtx , resource , items ){
+class FantasyPointsAdapter(var mCtx: Context, var resource:Int, var items:List<PlayerPointsData>)
+    : ArrayAdapter<PlayerPointsData>( mCtx , resource , items ){
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -23,7 +23,7 @@ class FantasyPointsAdapter(var mCtx: Context, var resource:Int, var items:List<M
         var textView1 : TextView = view.findViewById(R.id.descTv1)
 
 
-        var person : Model1 = items[position]
+        var person : PlayerPointsData = items[position]
 
         imageView.setImageDrawable(mCtx.resources.getDrawable(person.photo))
         textView.text = person.title
