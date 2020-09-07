@@ -1,12 +1,12 @@
 package com.ringpi.cric.fantasypoints
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ringpi.cric.R
 
@@ -22,11 +22,14 @@ class FantasypointsFragment : Fragment() {
         val root = inflater.inflate(R.layout.squadpoints_fragment, container, false)
         val view: View = inflater.inflate(R.layout.squadpoints_fragment, container, false)
         val teamName: TextView = view.findViewById(R.id.team_name)
-        teamName.setText("show team name here.")
+        val bundle = this.arguments
+        val jsonstring = bundle!!.getString("jsonstring")
+        val team = bundle!!.getString("team")
+        teamName.setText(team)
 
         val mFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-        // get team pid list from firebase
         // get current match pid list from json string
+        // get team pid list from firebase
         // find playing squad pid list for this match
         // parse bowling array and return bowling obj for each pid
         // parse batting array and return batting obj for eaach pid

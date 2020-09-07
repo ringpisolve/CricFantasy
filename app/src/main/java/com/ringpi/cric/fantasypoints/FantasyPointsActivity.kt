@@ -1,16 +1,10 @@
 package com.ringpi.cric.fantasypoints
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.FirebaseAuth
 import com.ringpi.cric.R
 
 class FantasyPointsActivity : AppCompatActivity() {
@@ -23,12 +17,16 @@ class FantasyPointsActivity : AppCompatActivity() {
         var jsonstring = intent.getStringExtra("jsonstring")
         var team = intent.getStringExtra("team")
 
+        val bundle = Bundle()
+        bundle.putString("jsonstring", jsonstring)
+        bundle.putString("team", team)
 
         val fm: FragmentManager = supportFragmentManager
         var fragment = fm.findFragmentByTag("myFragmentTag")
         if (fragment == null) {
             val ft: FragmentTransaction = fm.beginTransaction()
             fragment = FantasypointsFragment()
+            fragment.setArguments(bundle)
             ft.add(android.R.id.content, fragment, "myFragmentTag")
             ft.commit()
 
