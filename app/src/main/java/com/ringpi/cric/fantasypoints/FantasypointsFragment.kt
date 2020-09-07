@@ -25,6 +25,14 @@ class FantasypointsFragment : Fragment() {
         teamName.setText("show team name here.")
 
         val mFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+        // get team pid list from firebase
+        // get current match pid list from json string
+        // find playing squad pid list for this match
+        // parse bowling array and return bowling obj for each pid
+        // parse batting array and return batting obj for eaach pid
+        // parse fielding array and return fielding obj for each pid
+        // build PlayerPointsData for each pid and supply to adaptor.
+
 
         listView = view.findViewById(R.id.study_level_list1)
         var list = mutableListOf<PlayerPointsData>()
