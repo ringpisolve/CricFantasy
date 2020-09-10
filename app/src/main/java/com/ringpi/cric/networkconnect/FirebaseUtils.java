@@ -28,11 +28,11 @@ public class FirebaseUtils {
                 .document(teamName);
     }
 
-    public ArrayList<Integer> getPlayingElevenPIDList(String teamName) {
+    public static ArrayList<Integer> getPlayingElevenPIDList(String teamName) {
         ArrayList<Integer> list = new ArrayList<>();
         FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
 
-        rootRef.collection("leagues/kc-league/teams/rahul-team/playing11")
+        rootRef.collection("leagues/kc-league/teams/"+teamName+"/squad")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -40,10 +40,44 @@ public class FirebaseUtils {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                    String ss = document.getString("pid");
-                                    list.add(Integer.valueOf(ss));
+                                Boolean playingEleven=document.getBoolean("isInPlayingEleven");
+                                String ss = document.getString("pid");
 
-                                    Log.d("TAG", ss);
+                                    if(playingEleven==true) {
+                                        list.add(Integer.valueOf(ss));
+
+
+                                        Log.d("TAG", String.valueOf(list));
+                                    }
+
+
+
+
+
+                            }
+                        }
+                    }
+                });
+
+
+        return list;
+    }
+    public static ArrayList<Integer> getTeamPIDList(String teamName) {
+        ArrayList<Integer> list = new ArrayList<>();
+        FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
+
+        rootRef.collection("leagues/kc-league/teams/"+teamName+"/squad")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                String ss = document.getString("pid");
+                                list.add(Integer.valueOf(ss));
+
+                                Log.d("TAG", String.valueOf(list));
 
 
 

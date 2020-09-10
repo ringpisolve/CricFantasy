@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ringpi.cric.R
+import com.ringpi.cric.networkconnect.FirebaseUtils
+import com.ringpi.cric.networkconnect.Utils
 
 class FantasypointsFragment : Fragment() {
 
@@ -29,8 +31,11 @@ class FantasypointsFragment : Fragment() {
 
         val mFirestore: FirebaseFirestore = FirebaseFirestore.getInstance()
         // get current match pid list from json string
+         var pidlist=Utils.getCurrentMatchPlayersPIDList(jsonstring)
         // get team pid list from firebase
+          var teampidlist=FirebaseUtils.getTeamPIDList(team)
         // find playing squad pid list for this match
+        var playingElevenpidlist=FirebaseUtils.getPlayingElevenPIDList(team)
         // parse bowling array and return bowling obj for each pid
         // parse batting array and return batting obj for eaach pid
         // parse fielding array and return fielding obj for each pid

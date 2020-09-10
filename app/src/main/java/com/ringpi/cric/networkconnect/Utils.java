@@ -43,7 +43,7 @@ public class Utils {
         return result;
     }
 
-    public ArrayList<Integer> getCurrentMatchPlayersPIDList(String jsonString) {
+    public  static ArrayList<Integer> getCurrentMatchPlayersPIDList(String jsonString) {
         ArrayList<Integer> result = new ArrayList<>();
         try {
             JSONObject rootObj = new JSONObject(jsonString);
