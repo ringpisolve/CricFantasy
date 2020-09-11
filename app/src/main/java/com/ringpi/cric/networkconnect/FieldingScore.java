@@ -9,4 +9,10 @@ public class FieldingScore {
         this.catches = catches;
         this.stumped = stumped;
     }
+    public void setCatches(int catches){
+        this.catches=catches;
+    }
+    public void setStumped(int stumped){
+        this.stumped=stumped;
+    }
 }
